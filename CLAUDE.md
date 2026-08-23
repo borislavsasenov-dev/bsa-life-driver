@@ -1,0 +1,202 @@
+# BSA Life Driver
+
+Last updated: 2026-08-20
+
+## Project
+
+**BSA Life Driver** — a personal system for organizing daily life, fitness, and professional growth, built for **Borislav Asenov**.
+
+Borislav is a UX designer who is also learning marketing and wants to eventually offer clients a broader package including website design, SEO, marketing, and social media posts. This app is a separate personal project, not that client offering.
+
+The app is initially private and personal, used only by Borislav, but may evolve into something larger later.
+
+**Status:** Product-definition and technical-planning stage. No application files have been created yet.
+
+## Product Idea
+
+The app helps Borislav record activities and tasks, then eventually uses AI to analyze the collected information and suggest ways to:
+
+- Improve health
+- Move forward professionally
+- Become more productive
+- Gain more money
+
+It should not just be a checklist like Todoist or Apple Reminders. Tasks and activities should become useful personal data that AI can analyze over time to identify patterns and help Borislav improve his health, skills, work, and income.
+
+## MVP Divisions
+
+**Three divisions for MVP:**
+
+### 1. Fitness
+Workouts, exercises, sets and repetitions, weights, workout progress, personal fitness goals. The only division with specialized fields for MVP — see Data Model Direction below.
+
+### 2. Daily Life
+Everything actionable, as a plain task (free-text title, status, notes, dates). Covers apartment cleaning, grocery shopping, errands, and other everyday responsibilities, plus — for MVP — Professional Growth and NOC work, tracked as categories rather than separate divisions. Categories:
+- **Home** — apartment, groceries, repairs, general household
+- **Car**
+- **NOC** — Borislav's duty-officer day job at the National Operations Centre, DG Fire Safety and Civil Protection. Tasks are typically assigned by his chief officer (e.g. "prepare a wildfire presentation").
+- **Work** — Professional Growth work: UX design, marketing/SEO learning, social media, client or partner projects, business development. Given by Borislav himself, a client, or a partner.
+
+Professional Growth and NOC may become their own full divisions later, once there's enough data to know they need division-specific structure (e.g. specialized fields, separate views). Not needed for MVP.
+
+### 3. Notebook
+Personal reference material — not actionable, no status or due dates. Migrated from an existing external notebook (quotes, books, movies, websites, agency examples). Fields: **Name** (title/text), **Type** (tag — seeded with Quote, Books, Movies, Websites, Agencies, but open to new types as needed, same open-vocabulary approach as Fitness routines), **Notes** (free text). Purely for personal reference — not currently in scope for AI pattern-analysis (see Possible Future AI Insights).
+
+## Possible Future AI Insights
+
+Not decided yet — the MVP should first collect simple, useful, consistent data. Potential insights to explore later:
+
+- Which tasks are frequently postponed
+- Whether the workload is realistic
+- Which habits correlate with better workout or work performance
+- How much time is spent on client work versus learning
+- Whether professional skills are becoming balanced
+- Which activities contribute most to long-term goals
+- Where energy and attention are being lost
+- Whether weekly priorities match long-term ambitions
+
+AI analysis can begin manually through exported data before being integrated directly into the app.
+
+## Product Feel
+
+A **calm personal planner with analytical depth**:
+
+- Calm and easy enough for daily use
+- Structured enough to support meaningful insights
+- More personal than a business dashboard
+- More intelligent than a basic checklist
+
+The design can become more analytical as more data accumulates.
+
+## MVP Scope
+
+- Three divisions: Fitness, Daily Life (categories: Home, Car, NOC, Work), and Notebook (see MVP Divisions)
+- Add, edit, complete, and delete items
+- Categories and priorities
+- Due dates (optional per item — not every task needs a deadline)
+- Recurring items
+- In-app reminders: overdue/due-soon items are visually flagged in daily/weekly views (no push/desktop notifications for v1)
+- Daily and weekly views
+- Notes or results attached to completed items
+- A basic progress summary
+- CSV and JSON export
+
+The first version should not attempt to fully build an AI coach, CRM, fitness tracker, marketing planner, and productivity system all at once.
+
+## Minimum Daily/Weekly Workflow
+
+- **Daily**: the main thing the app should surface is overdue items — not a strict "today's agenda," since most Daily Life tasks don't have due dates. Overdue flagging matters more than day-by-day scheduling.
+- **Entry frequency is deliberately unscheduled**: Borislav may log data daily or as infrequently as twice a month, depending on the week — the app shouldn't force or nudge toward a fixed cadence. This applies across divisions (matches Fitness's flexible weekly-ish logging and Daily Life's ad-hoc task creation).
+- **Navigation**: separate screens per division (Fitness / Daily Life / Notebook), moved between via a switcher control (e.g. tabs or a nav switch) rather than one combined cross-division view.
+
+## MVP Screens
+
+- **Login** — email/password, single user (Borislav only). Added once the app moved to a hosted Supabase backend — needed so the publishable API key (necessarily exposed in the browser bundle once deployed) doesn't grant open read/write access to the data; Row Level Security policies scope every table to the logged-in user's ID.
+- **Daily Life** (default/landing screen after login) — task list, filterable by category (Home/Car/NOC/Work), add/edit task, overdue items flagged. No separate combined Home/Overview screen for v1 — the app opens directly here since it already surfaces overdue items.
+- **Fitness** — a single screen with two sections: Workouts (weekly batch entry — pick routine, log volume — plus history) and Weight (monthly log plus trend toward goal).
+- **Notebook** — list filterable by type (Quote/Books/Movies/Websites/Agencies), add/edit entry.
+- **Export** — CSV/JSON download.
+
+Navigation between these is via a screen switcher (see Minimum Daily/Weekly Workflow), not a combined cross-division view.
+
+## Data Model Direction
+
+**Tasks plus structured activities.**
+
+Daily errands can be stored as normal tasks, while workouts can have specialized fields. For example, a workout should not only be stored as "Complete workout" — useful details such as exercises, sets, repetitions, and weights are needed for future analysis.
+
+This is preferable to treating everything as a generic task, while remaining simpler than a large system with separate tasks, habits, goals, and projects from the beginning.
+
+For MVP, only Fitness has specialized fields (workout routine/volume, weight — see `reference-workout-routines.md`). Everything in Daily Life — including Home, Car, NOC, and Work categories — is a plain task: title, category tag, status, notes, dates. Specialized fields for any of those categories can be added later once it's clear what's actually useful to track.
+
+Notebook is a third, simpler record shape: title, type tag, notes — no status, no dates. It's reference material, not a task or an activity, so it doesn't need completion tracking or scheduling at all.
+
+## Database and Storage
+
+The app should use a database, not a spreadsheet, as primary storage. A spreadsheet/CSV is useful for viewing, editing, downloading, and analyzing data, but a database reliably stores, searches, updates, and organizes records.
+
+Expected data flow:
+
+```text
+User enters information in the app
+        ->
+App stores it in a database
+        ->
+User views and organizes it in the app
+        ->
+User exports it as CSV or JSON
+        ->
+User uploads the export to an AI tool for analysis
+```
+
+The app is the primary daily interface; CSV/JSON is an export format, not the main storage system.
+
+## Technology Stack
+
+**Decided:**
+
+- **Frontend:** Next.js (React + TypeScript)
+- **Styling:** Tailwind CSS
+- **Backend/Database:** Supabase — hosted Postgres, authentication, automatic backups, a dashboard for inspecting data, and a foundation for future AI integrations
+- **Deployment:** Vercel (free tier)
+
+Chosen because Supabase's docs/client libraries target Next.js as the primary framework, it's a well-trodden stack for AI-assisted development (the app is expected to be implemented by coding agents, see Agent and Workflow Discussion), and it gives full control over the UI rather than working within a no-code tool's constraints — important given the "calm personal planner" design goal and the custom Fitness fields.
+
+Not yet implemented — still in the planning stage. Device sync is not a v1 requirement since v1 is computer-only (see Decisions Log), but this stack supports it later without a rebuild.
+
+**Cost:** Supabase's and Vercel's free tiers should be sufficient for a private MVP used by one person. Paid tiers may become necessary with many users, large files, heavy traffic, or production-level reliability needs. Data must remain exportable if the project stops using a paid service — CSV/JSON export and regular backups should be planned from the start.
+
+## AI Analysis Approach
+
+Initially manual:
+
+1. Use BSA Life Driver normally.
+2. Export the data as CSV or JSON.
+3. Upload the export to ChatGPT, Claude, or another AI tool.
+4. Ask the AI to identify patterns, problems, and recommendations.
+
+Direct AI functionality inside the app can be considered later, after confirming the collected data is useful and consistently recorded.
+
+## Agent and Workflow Discussion
+
+**Decided: no manual multi-agent setup.** Borislav directs one Claude Code session conversationally — describes what to build, reviews the result, asks for changes. Claude Code may delegate specific sub-tasks to specialized subagents internally when useful (e.g. research), but that's automatic and not something Borislav needs to configure or orchestrate.
+
+The earlier idea of separate Product/UX/UI/Engineering/Testing/Orchestrator agents was considered and dropped — that level of coordination overhead only pays off on a much larger, multi-person-scale project, not a solo personal MVP.
+
+General rule:
+
+> Chat is for thinking, planning, explaining, and deciding.
+> Coding agents are for executing, modifying files, and testing.
+
+## Decisions Log
+
+- **2026-08-20** — V1 will be **computer-only**. Phone access and cross-device sync are deferred and will be reconsidered once the computer-only version is in use.
+- **2026-08-20** — Reminders for v1 are **in-app indicators only** (overdue/due-soon items flagged in daily/weekly views) — no push or desktop notifications, to keep scope aligned with the computer-only v1.
+- **2026-08-20** — Fitness tracks two record types: **workout sessions** (logged weekly, in a batch) and **weight** (logged monthly). No other fitness metrics for now. See `reference-workout-routines.md` for routine templates and detail.
+- **2026-08-20** — MVP scope narrowed to **two divisions: Fitness and Daily Life.** Professional Growth and NOC (day job) are not separate divisions for MVP — they're categories under Daily Life (alongside Home and Car), all using the same plain-task fields (title, status, notes, dates). They may become their own divisions later if it turns out they need division-specific structure.
+- **2026-08-20** — Added a **3rd division: Notebook**, for personal reference material (quotes, books, movies, websites, agency examples), migrated from an existing external notebook. Simplest record shape in the app: title, type tag, notes — no status or dates, since it's not actionable. Purely for personal reference, not currently part of the AI-analysis scope.
+- **2026-08-20** — Minimum workflow defined: daily view centers on **overdue items**, not a scheduled agenda; **data entry cadence is intentionally unforced** (anywhere from daily to twice a month); navigation is **separate screens per division** with a switcher control, not one combined view.
+- **2026-08-20** — MVP screens defined: **no dedicated Home/Overview screen** — the app opens directly to Daily Life, which already shows overdue items. **Fitness is one screen** with two sections (Workouts, Weight), not two separate screens. See MVP Screens.
+- **2026-08-20** — Technology stack decided: **Next.js (React + TypeScript) + Tailwind CSS + Supabase, deployed on Vercel.** See Technology Stack.
+- **2026-08-20** — No manual multi-agent workflow. Borislav directs one Claude Code session conversationally; the earlier Product/UX/UI/Engineering/Testing/Orchestrator agent split was dropped as unnecessary coordination overhead for a solo personal project. See Agent and Workflow Discussion.
+- **2026-08-23** — Added a **Login screen** (email/password, single user) with **Row Level Security** on every table. Needed because the Supabase publishable key is exposed in the browser once the app is deployed — without RLS scoped to the logged-in user's ID, anyone who found the deployed URL could read/write the data directly via the API. Not in the original MVP screen list; added when Supabase was actually wired up.
+
+## Reference Material
+
+- `reference-old-excel-tasklist.md` — Borislav's current Excel task list, for data-model comparison. Not loaded by default; read only when relevant.
+- `reference-workout-routines.md` — Fitness routine templates, rep/series conventions, and weight-tracking detail. Not loaded by default; read only when relevant.
+
+## Open Questions
+
+None currently blocking. Next planning steps below.
+
+## Suggested Next Planning Steps
+
+1. ~~Decide whether the first version needs computer-and-phone synchronization.~~ Decided: computer-only for v1.
+2. ~~Define exactly what information each type of item stores.~~ Decided: see MVP Divisions and Data Model Direction.
+3. ~~Define the minimum daily workflow.~~ Decided: see Minimum Daily/Weekly Workflow.
+4. ~~Decide which screens are needed for the MVP.~~ Decided: see MVP Screens. Revisit if anything feels missing once the app is in use.
+5. Create a short product brief.
+6. ~~Choose the technology and project structure.~~ Decided: see Technology Stack.
+7. ~~Define the agent workflow.~~ Decided: see Agent and Workflow Discussion.
+8. Only then begin implementation.
