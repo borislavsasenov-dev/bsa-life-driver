@@ -14,7 +14,7 @@ export function NavSwitcher() {
   const pathname = usePathname();
 
   return (
-    <nav className="flex gap-1 rounded-full bg-stone-100 p-1">
+    <nav className="flex gap-1 rounded-full bg-neutral-100 p-1">
       {screens.map((screen) => {
         const isActive = pathname === screen.href;
         return (
@@ -23,8 +23,8 @@ export function NavSwitcher() {
             href={screen.href}
             className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${
               isActive
-                ? "bg-white text-stone-900 shadow-sm"
-                : "text-stone-500 hover:text-stone-800"
+                ? "bg-green-400 text-neutral-900"
+                : "text-neutral-500 hover:text-neutral-800"
             }`}
           >
             {screen.label}

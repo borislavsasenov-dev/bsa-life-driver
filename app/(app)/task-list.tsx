@@ -37,8 +37,8 @@ export function TaskList({ tasks }: { tasks: Task[] }) {
             onClick={() => setFilter(c)}
             className={`rounded-full px-3 py-1 text-xs font-medium transition ${
               filter === c
-                ? "bg-stone-800 text-white"
-                : "bg-stone-100 text-stone-500 hover:bg-stone-200"
+                ? "bg-green-400 text-neutral-900"
+                : "bg-neutral-100 text-neutral-500 hover:bg-neutral-200"
             }`}
           >
             {c}
@@ -47,7 +47,7 @@ export function TaskList({ tasks }: { tasks: Task[] }) {
       </div>
 
       {visibleTasks.length === 0 && (
-        <p className="py-8 text-center text-sm text-stone-400">
+        <p className="py-8 text-center text-sm text-neutral-400">
           No tasks here yet.
         </p>
       )}
@@ -60,10 +60,10 @@ export function TaskList({ tasks }: { tasks: Task[] }) {
           return (
             <li
               key={task.id}
-              className={`rounded-xl border px-4 py-3 ${
+              className={`rounded-2xl border px-4 py-3 shadow-sm ${
                 overdue
                   ? "border-red-200 bg-red-50"
-                  : "border-stone-200 bg-white"
+                  : "border-neutral-200 bg-white"
               }`}
             >
               <div className="flex items-start justify-between gap-3">
@@ -77,18 +77,18 @@ export function TaskList({ tasks }: { tasks: Task[] }) {
                         setTaskStatus(task.id, done ? "Not Started" : "Done")
                       )
                     }
-                    className="mt-1 size-4 rounded border-stone-300"
+                    className="mt-1 size-4 rounded border-neutral-300 accent-green-500"
                   />
                   <div>
                     <p
                       className={`text-sm font-medium ${
-                        done ? "text-stone-400 line-through" : "text-stone-800"
+                        done ? "text-neutral-400 line-through" : "text-neutral-800"
                       }`}
                     >
                       {task.title}
                     </p>
-                    <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-stone-500">
-                      <span className="rounded-full bg-stone-100 px-2 py-0.5">
+                    <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-neutral-500">
+                      <span className="rounded-full bg-neutral-100 px-2 py-0.5">
                         {task.category}
                       </span>
                       {task.priority === "High" && (
@@ -104,7 +104,7 @@ export function TaskList({ tasks }: { tasks: Task[] }) {
                       )}
                     </div>
                     {task.notes && (
-                      <p className="mt-1 text-xs text-stone-500">{task.notes}</p>
+                      <p className="mt-1 text-xs text-neutral-500">{task.notes}</p>
                     )}
                   </div>
                 </div>
@@ -112,7 +112,7 @@ export function TaskList({ tasks }: { tasks: Task[] }) {
                 <button
                   onClick={() => startTransition(() => deleteTask(task.id))}
                   disabled={isPending}
-                  className="text-xs text-stone-300 transition hover:text-red-500"
+                  className="text-xs text-neutral-300 transition hover:text-red-500"
                 >
                   Delete
                 </button>

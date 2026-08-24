@@ -9,14 +9,14 @@ export default async function LoginPage({
   const { error } = await searchParams;
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-stone-50 px-4">
-      <div className="w-full max-w-sm rounded-2xl bg-white p-8 shadow-sm ring-1 ring-stone-200">
-        <h1 className="text-xl font-semibold text-stone-800">BSA Life Driver</h1>
-        <p className="mt-1 text-sm text-stone-500">Sign in to continue.</p>
+    <div className="flex min-h-screen items-center justify-center bg-neutral-50 px-4">
+      <div className="w-full max-w-sm rounded-3xl bg-white p-8 shadow-sm ring-1 ring-neutral-200">
+        <h1 className="text-xl font-semibold text-neutral-900">BSA Life Driver</h1>
+        <p className="mt-1 text-sm text-neutral-500">Sign in to continue.</p>
 
         <form action={login} className="mt-6 space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-stone-700">
+            <label htmlFor="email" className="block text-sm font-medium text-neutral-700">
               Email
             </label>
             <input
@@ -25,12 +25,12 @@ export default async function LoginPage({
               type="email"
               required
               autoComplete="username"
-              className="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2 text-sm text-stone-900 focus:border-stone-500 focus:outline-none focus:ring-1 focus:ring-stone-500"
+              className="mt-1 w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm text-neutral-900 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500"
             />
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-stone-700">
+            <label htmlFor="password" className="block text-sm font-medium text-neutral-700">
               Password
             </label>
             <PasswordInput />
@@ -40,7 +40,7 @@ export default async function LoginPage({
 
           <button
             type="submit"
-            className="w-full rounded-lg bg-stone-800 px-3 py-2 text-sm font-medium text-white transition hover:bg-stone-700"
+            className="w-full rounded-full bg-green-400 px-3 py-2 text-sm font-medium text-neutral-900 transition hover:bg-green-300"
           >
             Sign in
           </button>

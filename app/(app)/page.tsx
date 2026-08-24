@@ -17,7 +17,7 @@ export default async function DailyLifePage() {
 
   return (
     <div>
-      <h1 className="mb-6 text-lg font-semibold text-stone-800">Daily Life</h1>
+      <h1 className="mb-6 text-lg font-semibold text-neutral-900">Daily Life</h1>
       <TaskForm />
       <TaskList tasks={tasks ?? []} />
     </div>
