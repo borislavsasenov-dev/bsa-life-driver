@@ -23,7 +23,7 @@ export function WorkoutList({ workouts }: { workouts: Workout[] }) {
       {workouts.map((w) => (
         <li
           key={w.id}
-          className="rounded-2xl border border-neutral-200 bg-white px-4 py-3 shadow-sm"
+          className="rounded-2xl border border-neutral-200 bg-white px-4 py-3"
         >
           <div className="flex items-start justify-between gap-3">
             <div>

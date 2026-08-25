@@ -40,7 +40,7 @@ export function WeightList({ logs }: { logs: WeightLog[] }) {
         {logs.map((log) => (
           <li
             key={log.id}
-            className="flex items-center justify-between rounded-2xl border border-neutral-200 bg-white px-4 py-3 shadow-sm"
+            className="flex items-center justify-between rounded-2xl border border-neutral-200 bg-white px-4 py-3"
           >
             <div>
               <p className="text-sm font-medium text-neutral-800">{log.weight_kg} kg</p>

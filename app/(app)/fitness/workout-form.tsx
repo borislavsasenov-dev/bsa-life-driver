@@ -17,7 +17,7 @@ export function WorkoutForm() {
         await addWorkout(formData);
         formRef.current?.reset();
       }}
-      className="mb-4 rounded-3xl border border-neutral-200 bg-white p-4 shadow-sm"
+      className="mb-4 rounded-3xl border border-neutral-200 bg-white p-4"
     >
       <div className="flex flex-wrap items-center gap-2">
         <input
@@ -40,14 +40,6 @@ export function WorkoutForm() {
             <option key={r} value={r} />
           ))}
         </datalist>
-
-        <input
-          type="number"
-          name="duration_minutes"
-          placeholder="Minutes"
-          min={0}
-          className="w-24 rounded-lg border border-neutral-300 px-2 py-1 text-xs text-neutral-700 placeholder:text-neutral-400"
-        />
 
         <button
           type="submit"

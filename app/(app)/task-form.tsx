@@ -15,7 +15,7 @@ export function TaskForm() {
         formRef.current?.reset();
         setExpanded(false);
       }}
-      className="mb-6 rounded-3xl border border-neutral-200 bg-white p-4 shadow-sm"
+      className="mb-6 rounded-3xl border border-neutral-200 bg-white p-4"
     >
       <input
         name="title"

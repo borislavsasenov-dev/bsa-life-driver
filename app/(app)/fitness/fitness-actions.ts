@@ -3,12 +3,15 @@
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 
+// A session is currently 12 series and runs ~40 minutes. Bump this if the
+// routines' series count changes (see reference-workout-routines.md).
+const SESSION_DURATION_MINUTES = 40;
+
 export async function addWorkout(formData: FormData) {
   const supabase = await createClient();
 
   const session_date = formData.get("session_date") as string;
   const routine = (formData.get("routine") as string)?.trim();
-  const durationRaw = formData.get("duration_minutes") as string;
   const notes = (formData.get("notes") as string)?.trim() || null;
 
   if (!session_date || !routine) return;
@@ -16,7 +19,7 @@ export async function addWorkout(formData: FormData) {
   const { error } = await supabase.from("fitness_workouts").insert({
     session_date,
     routine,
-    duration_minutes: durationRaw ? Number(durationRaw) : null,
+    duration_minutes: SESSION_DURATION_MINUTES,
     notes,
   });
 

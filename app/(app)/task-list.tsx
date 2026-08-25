@@ -60,7 +60,7 @@ export function TaskList({ tasks }: { tasks: Task[] }) {
           return (
             <li
               key={task.id}
-              className={`rounded-2xl border px-4 py-3 shadow-sm ${
+              className={`rounded-2xl border px-4 py-3 ${
                 overdue
                   ? "border-red-200 bg-red-50"
                   : "border-neutral-200 bg-white"

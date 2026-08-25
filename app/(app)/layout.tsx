@@ -3,7 +3,7 @@ import { signOut } from "./actions";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="min-h-screen bg-neutral-100">
       <header className="border-b border-neutral-200 bg-white">
         <div className="mx-auto flex max-w-3xl items-center justify-between px-6 py-4">
           <span className="text-sm font-semibold text-neutral-900">BSA Life Driver</span>
