@@ -61,15 +61,11 @@ export function WorkoutForm() {
               className={`${inputClass} pr-9`}
             />
             <svg
-              viewBox="0 0 20 20"
+              viewBox="0 -960 960 960"
               fill="currentColor"
-              className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400"
+              className="pointer-events-none absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-neutral-400"
             >
-              <path
-                fillRule="evenodd"
-                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                clipRule="evenodd"
-              />
+              <path d="M480-344 240-584l43-43 197 197 197-197 43 43-240 240Z" />
             </svg>
           </div>
 
