@@ -1,6 +1,6 @@
 # BSA Life Driver
 
-Last updated: 2026-08-20
+Last updated: 2026-08-25
 
 ## Project
 
@@ -67,6 +67,15 @@ A **calm personal planner with analytical depth**:
 - More intelligent than a basic checklist
 
 The design can become more analytical as more data accumulates.
+
+## UI Conventions
+
+Established while implementing the MVP screens — apply these by default to any new screen or component, without re-asking:
+
+- **No shadows anywhere.** Flat surfaces only.
+- **No borders on white card/box containers** (forms, list rows, the login card). The page background is gray (`bg-neutral-100`) and cards are white (`bg-white`) — that contrast alone is enough to separate them; an outer border is redundant. This does not apply to form inputs (which keep a visible border for affordance) or to semantically-colored states, e.g. an overdue task's red-tinted card keeps its border as a status accent.
+- **Dates displayed to the user** are formatted as `D MMM YYYY` (e.g. `25 Aug 2026`), not raw ISO (`2026-08-25`). Format client-side by splitting the ISO string manually (not via `new Date(iso)` + `toLocaleDateString`), to avoid timezone-shift bugs on date-only values.
+- **Delete actions are tertiary**: plain text, no border or background fill, colored red (e.g. `text-red-400` default, `hover:text-red-600`) rather than neutral gray that only turns red on hover — the destructive intent should be visible at rest, not just discovered on hover.
 
 ## MVP Scope
 
@@ -180,6 +189,7 @@ General rule:
 - **2026-08-20** — Technology stack decided: **Next.js (React + TypeScript) + Tailwind CSS + Supabase, deployed on Vercel.** See Technology Stack.
 - **2026-08-20** — No manual multi-agent workflow. Borislav directs one Claude Code session conversationally; the earlier Product/UX/UI/Engineering/Testing/Orchestrator agent split was dropped as unnecessary coordination overhead for a solo personal project. See Agent and Workflow Discussion.
 - **2026-08-23** — Added a **Login screen** (email/password, single user) with **Row Level Security** on every table. Needed because the Supabase publishable key is exposed in the browser once the app is deployed — without RLS scoped to the logged-in user's ID, anyone who found the deployed URL could read/write the data directly via the API. Not in the original MVP screen list; added when Supabase was actually wired up.
+- **2026-08-25** — Visual style settled once the first screens were built: no shadows, no borders on white cards (white-on-gray contrast is enough), dates shown as `D MMM YYYY`, delete actions are tertiary red text. See UI Conventions. Also, workout **duration is no longer typed in** — it's a fixed 40-minute constant (12-series sessions), and workout **volume is no longer typed in per session** either — it's snapshotted automatically from a per-routine lookup (`app/(app)/fitness/routines.ts`) at log time, matching the "name the routine, app already knows its volume" behavior noted in `reference-workout-routines.md`.
 
 ## Reference Material
 

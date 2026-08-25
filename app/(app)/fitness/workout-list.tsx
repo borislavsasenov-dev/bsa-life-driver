@@ -11,6 +11,13 @@ type Workout = {
   notes: string | null;
 };
 
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+function formatDate(iso: string) {
+  const [y, m, d] = iso.split("-");
+  return `${Number(d)} ${MONTHS[Number(m) - 1]} ${y}`;
+}
+
 export function WorkoutList({ workouts }: { workouts: Workout[] }) {
   const [isPending, startTransition] = useTransition();
 
@@ -21,28 +28,18 @@ export function WorkoutList({ workouts }: { workouts: Workout[] }) {
   return (
     <ul className="space-y-2">
       {workouts.map((w) => (
-        <li
-          key={w.id}
-          className="rounded-2xl border border-neutral-200 bg-white px-4 py-3"
-        >
-          <div className="flex items-start justify-between gap-3">
-            <div>
-              <p className="text-sm font-medium text-neutral-800">
-                {w.routine}
-                {w.duration_minutes ? (
-                  <span className="ml-2 text-xs font-normal text-neutral-400">
-                    {w.duration_minutes} min
-                  </span>
-                ) : null}
-              </p>
-              <p className="mt-0.5 text-xs text-neutral-500">{w.session_date}</p>
-              {w.notes && <p className="mt-1 text-xs text-neutral-500">{w.notes}</p>}
+        <li key={w.id} className="rounded-2xl bg-white px-4 py-3">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
+              <span className="text-sm font-medium text-neutral-800">{w.routine}</span>
+              {w.notes && <span className="text-xs text-neutral-500">· {w.notes}</span>}
+              <span className="text-xs text-neutral-400">· {formatDate(w.session_date)}</span>
             </div>
 
             <button
               onClick={() => startTransition(() => deleteWorkout(w.id))}
               disabled={isPending}
-              className="text-xs text-neutral-300 transition hover:text-red-500"
+              className="shrink-0 text-xs text-red-400 transition hover:text-red-600"
             >
               Delete
             </button>

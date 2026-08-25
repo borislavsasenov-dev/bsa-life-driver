@@ -60,10 +60,8 @@ export function TaskList({ tasks }: { tasks: Task[] }) {
           return (
             <li
               key={task.id}
-              className={`rounded-2xl border px-4 py-3 ${
-                overdue
-                  ? "border-red-200 bg-red-50"
-                  : "border-neutral-200 bg-white"
+              className={`rounded-2xl px-4 py-3 ${
+                overdue ? "border border-red-200 bg-red-50" : "bg-white"
               }`}
             >
               <div className="flex items-start justify-between gap-3">
@@ -112,7 +110,7 @@ export function TaskList({ tasks }: { tasks: Task[] }) {
                 <button
                   onClick={() => startTransition(() => deleteTask(task.id))}
                   disabled={isPending}
-                  className="text-xs text-neutral-300 transition hover:text-red-500"
+                  className="text-xs text-red-400 transition hover:text-red-600"
                 >
                   Delete
                 </button>

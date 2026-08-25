@@ -15,7 +15,7 @@ export function WeightForm() {
         await addWeightLog(formData);
         formRef.current?.reset();
       }}
-      className="mb-4 flex flex-wrap items-center gap-2 rounded-3xl border border-neutral-200 bg-white p-4"
+      className="mb-4 flex flex-wrap items-center gap-2 rounded-3xl bg-white p-4"
     >
       <input
         type="date"

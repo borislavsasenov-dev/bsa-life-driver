@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { ROUTINE_VOLUMES } from "./routines";
 
 // A session is currently 12 series and runs ~40 minutes. Bump this if the
 // routines' series count changes (see reference-workout-routines.md).
@@ -12,7 +13,6 @@ export async function addWorkout(formData: FormData) {
 
   const session_date = formData.get("session_date") as string;
   const routine = (formData.get("routine") as string)?.trim();
-  const notes = (formData.get("notes") as string)?.trim() || null;
 
   if (!session_date || !routine) return;
 
@@ -20,7 +20,7 @@ export async function addWorkout(formData: FormData) {
     session_date,
     routine,
     duration_minutes: SESSION_DURATION_MINUTES,
-    notes,
+    notes: ROUTINE_VOLUMES[routine] ?? null,
   });
 
   if (error) throw new Error(error.message);

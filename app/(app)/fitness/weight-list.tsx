@@ -40,7 +40,7 @@ export function WeightList({ logs }: { logs: WeightLog[] }) {
         {logs.map((log) => (
           <li
             key={log.id}
-            className="flex items-center justify-between rounded-2xl border border-neutral-200 bg-white px-4 py-3"
+            className="flex items-center justify-between rounded-2xl bg-white px-4 py-3"
           >
             <div>
               <p className="text-sm font-medium text-neutral-800">{log.weight_kg} kg</p>
@@ -51,7 +51,7 @@ export function WeightList({ logs }: { logs: WeightLog[] }) {
             <button
               onClick={() => startTransition(() => deleteWeightLog(log.id))}
               disabled={isPending}
-              className="text-xs text-neutral-300 transition hover:text-red-500"
+              className="text-xs text-red-400 transition hover:text-red-600"
             >
               Delete
             </button>
