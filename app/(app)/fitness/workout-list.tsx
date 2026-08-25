@@ -2,7 +2,8 @@
 
 import { useTransition } from "react";
 import { deleteWorkout } from "./fitness-actions";
-import { formatDate } from "./date-format";
+import { formatDate } from "../date-format";
+import { buttonClass } from "../ui";
 
 type Workout = {
   id: string;
@@ -34,7 +35,7 @@ export function WorkoutList({ workouts }: { workouts: Workout[] }) {
                 <button
                   onClick={() => startTransition(() => deleteWorkout(w.id))}
                   disabled={isPending}
-                  className="text-xs text-red-400 transition hover:text-red-600"
+                  className={buttonClass("tertiary", "destructive", "sm")}
                 >
                   Delete
                 </button>

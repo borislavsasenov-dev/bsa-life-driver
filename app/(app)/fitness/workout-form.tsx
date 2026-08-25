@@ -3,16 +3,13 @@
 import { useRef, useState } from "react";
 import { addWorkout } from "./fitness-actions";
 import { knownRoutines } from "./routines";
-import { formatDate } from "./date-format";
+import { DateField } from "../date-field";
+import { labelClass, inputClass, buttonClass } from "../ui";
 
 const today = () => new Date().toISOString().slice(0, 10);
 
-const fieldClass =
-  "h-11 w-full rounded-lg border border-neutral-300 px-3 text-sm text-neutral-700 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500";
-
 export function WorkoutForm() {
   const formRef = useRef<HTMLFormElement>(null);
-  const dateInputRef = useRef<HTMLInputElement>(null);
 
   const [dateValue, setDateValue] = useState(today());
   const [routineValue, setRoutineValue] = useState("");
@@ -35,41 +32,20 @@ export function WorkoutForm() {
     >
       <div className="flex flex-wrap items-start gap-3">
         <div className="flex flex-col gap-1">
-          <label htmlFor="session_date" className="text-xs font-medium text-neutral-500">
+          <label htmlFor="session_date" className={labelClass}>
             Date
           </label>
-          <div className="relative h-11 w-40">
-            <button
-              type="button"
-              onClick={() => {
-                const el = dateInputRef.current;
-                if (!el) return;
-                if (typeof el.showPicker === "function") {
-                  el.showPicker();
-                } else {
-                  el.focus();
-                }
-              }}
-              className="flex h-11 w-40 items-center rounded-lg border border-neutral-300 px-3 text-left text-sm text-neutral-700 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500"
-            >
-              {formatDate(dateValue)}
-            </button>
-            <input
-              ref={dateInputRef}
-              id="session_date"
-              type="date"
-              name="session_date"
-              required
-              tabIndex={-1}
-              value={dateValue}
-              onChange={(e) => setDateValue(e.target.value)}
-              className="pointer-events-none absolute inset-0 h-11 w-40 opacity-0"
-            />
-          </div>
+          <DateField
+            id="session_date"
+            name="session_date"
+            value={dateValue}
+            onChange={setDateValue}
+            required
+          />
         </div>
 
         <div className="relative flex min-w-[12rem] flex-1 flex-col gap-1">
-          <label htmlFor="routine" className="text-xs font-medium text-neutral-500">
+          <label htmlFor="routine" className={labelClass}>
             Routines
           </label>
           <div className="relative">
@@ -82,7 +58,7 @@ export function WorkoutForm() {
               onChange={(e) => setRoutineValue(e.target.value)}
               onFocus={() => setSuggestionsOpen(true)}
               onBlur={() => setSuggestionsOpen(false)}
-              className={`${fieldClass} pr-9`}
+              className={`${inputClass} pr-9`}
             />
             <svg
               viewBox="0 0 20 20"
@@ -118,10 +94,7 @@ export function WorkoutForm() {
           )}
         </div>
 
-        <button
-          type="submit"
-          className="h-11 shrink-0 self-end rounded-full bg-green-400 px-5 text-sm font-medium text-neutral-900 transition hover:bg-green-300"
-        >
+        <button type="submit" className={`${buttonClass("primary", "brand", "md")} shrink-0 self-end`}>
           Log session
         </button>
       </div>

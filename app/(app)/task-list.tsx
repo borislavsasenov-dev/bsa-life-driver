@@ -2,6 +2,8 @@
 
 import { useState, useTransition } from "react";
 import { deleteTask, setTaskStatus } from "./daily-life-actions";
+import { formatDate } from "./date-format";
+import { buttonClass } from "./ui";
 
 type Task = {
   id: string;
@@ -97,7 +99,7 @@ export function TaskList({ tasks }: { tasks: Task[] }) {
                       {task.due_date && (
                         <span className={overdue ? "font-medium text-red-600" : ""}>
                           {overdue ? "Overdue: " : "Due "}
-                          {task.due_date}
+                          {formatDate(task.due_date)}
                         </span>
                       )}
                     </div>
@@ -110,7 +112,7 @@ export function TaskList({ tasks }: { tasks: Task[] }) {
                 <button
                   onClick={() => startTransition(() => deleteTask(task.id))}
                   disabled={isPending}
-                  className="text-xs text-red-400 transition hover:text-red-600"
+                  className={buttonClass("tertiary", "destructive", "sm")}
                 >
                   Delete
                 </button>

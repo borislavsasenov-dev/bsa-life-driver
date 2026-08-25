@@ -1,5 +1,6 @@
 import { login } from "./actions";
 import { PasswordInput } from "./password-input";
+import { inputClass, buttonClass } from "../(app)/ui";
 
 export default async function LoginPage({
   searchParams,
@@ -25,7 +26,7 @@ export default async function LoginPage({
               type="email"
               required
               autoComplete="username"
-              className="mt-1 w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm text-neutral-900 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500"
+              className={`mt-1 ${inputClass}`}
             />
           </div>
 
@@ -38,10 +39,7 @@ export default async function LoginPage({
 
           {error && <p className="text-sm text-red-600">{error}</p>}
 
-          <button
-            type="submit"
-            className="w-full rounded-full bg-green-400 px-3 py-2 text-sm font-medium text-neutral-900 transition hover:bg-green-300"
-          >
+          <button type="submit" className={`w-full ${buttonClass("primary", "brand", "md")}`}>
             Sign in
           </button>
         </form>

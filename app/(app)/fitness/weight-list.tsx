@@ -2,6 +2,8 @@
 
 import { useTransition } from "react";
 import { deleteWeightLog } from "./fitness-actions";
+import { formatDate } from "../date-format";
+import { buttonClass } from "../ui";
 
 type WeightLog = {
   id: string;
@@ -44,14 +46,14 @@ export function WeightList({ logs }: { logs: WeightLog[] }) {
           >
             <div>
               <p className="text-sm font-medium text-neutral-800">{log.weight_kg} kg</p>
-              <p className="mt-0.5 text-xs text-neutral-500">{log.log_date}</p>
+              <p className="mt-0.5 text-xs text-neutral-500">{formatDate(log.log_date)}</p>
               {log.notes && <p className="mt-1 text-xs text-neutral-500">{log.notes}</p>}
             </div>
 
             <button
               onClick={() => startTransition(() => deleteWeightLog(log.id))}
               disabled={isPending}
-              className="text-xs text-red-400 transition hover:text-red-600"
+              className={buttonClass("tertiary", "destructive", "sm")}
             >
               Delete
             </button>
