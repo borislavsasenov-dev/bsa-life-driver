@@ -39,18 +39,31 @@ export function WorkoutForm() {
             Date
           </label>
           <div className="relative h-11 w-40">
-            <div className="pointer-events-none flex h-11 w-40 items-center rounded-lg border border-neutral-300 px-3 text-sm text-neutral-700">
+            <button
+              type="button"
+              onClick={() => {
+                const el = dateInputRef.current;
+                if (!el) return;
+                if (typeof el.showPicker === "function") {
+                  el.showPicker();
+                } else {
+                  el.focus();
+                }
+              }}
+              className="flex h-11 w-40 items-center rounded-lg border border-neutral-300 px-3 text-left text-sm text-neutral-700 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500"
+            >
               {formatDate(dateValue)}
-            </div>
+            </button>
             <input
               ref={dateInputRef}
               id="session_date"
               type="date"
               name="session_date"
               required
+              tabIndex={-1}
               value={dateValue}
               onChange={(e) => setDateValue(e.target.value)}
-              className="absolute inset-0 h-11 w-40 cursor-pointer opacity-0"
+              className="pointer-events-none absolute inset-0 h-11 w-40 opacity-0"
             />
           </div>
         </div>
