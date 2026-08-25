@@ -2,6 +2,7 @@
 
 import { useTransition } from "react";
 import { deleteWorkout } from "./fitness-actions";
+import { formatDate } from "./date-format";
 
 type Workout = {
   id: string;
@@ -10,13 +11,6 @@ type Workout = {
   duration_minutes: number | null;
   notes: string | null;
 };
-
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-function formatDate(iso: string) {
-  const [y, m, d] = iso.split("-");
-  return `${Number(d)} ${MONTHS[Number(m) - 1]} ${y}`;
-}
 
 export function WorkoutList({ workouts }: { workouts: Workout[] }) {
   const [isPending, startTransition] = useTransition();
