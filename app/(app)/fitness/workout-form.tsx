@@ -63,7 +63,7 @@ export function WorkoutForm() {
             <svg
               viewBox="0 -960 960 960"
               fill="currentColor"
-              className="pointer-events-none absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-neutral-400"
+              className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400"
             >
               <path d="M480-344 240-584l43-43 197 197 197-197 43 43-240 240Z" />
             </svg>

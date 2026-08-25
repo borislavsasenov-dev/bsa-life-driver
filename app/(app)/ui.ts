@@ -5,15 +5,15 @@
 export const labelClass = "text-xs font-medium text-neutral-500";
 
 export const inputClass =
-  "h-11 w-full rounded-lg border border-neutral-300 bg-white px-3 text-sm text-neutral-700 placeholder:text-neutral-400 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500";
+  "h-8 w-full rounded-lg border border-neutral-300 bg-white px-3 text-sm text-neutral-700 placeholder:text-neutral-400 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500";
 
 type ButtonVariant = "primary" | "secondary" | "tertiary";
 type ButtonTone = "brand" | "neutral" | "destructive";
 type ButtonSize = "sm" | "md";
 
 const sizeClass: Record<ButtonSize, string> = {
-  sm: "h-9 px-3 text-xs",
-  md: "h-11 px-5 text-sm",
+  sm: "h-7 px-3 text-xs",
+  md: "h-8 px-5 text-sm",
 };
 
 const filledClass: Record<ButtonVariant, Record<ButtonTone, string>> = {
