@@ -1,6 +1,7 @@
 import { login } from "./actions";
+import { EmailInput } from "./email-input";
 import { PasswordInput } from "./password-input";
-import { inputClass, buttonClass } from "../(app)/ui";
+import { buttonClass } from "../(app)/ui";
 
 export default async function LoginPage({
   searchParams,
@@ -20,14 +21,7 @@ export default async function LoginPage({
             <label htmlFor="email" className="block text-sm font-medium text-neutral-700">
               Email
             </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              required
-              autoComplete="username"
-              className={`mt-1 ${inputClass}`}
-            />
+            <EmailInput />
           </div>
 
           <div>
