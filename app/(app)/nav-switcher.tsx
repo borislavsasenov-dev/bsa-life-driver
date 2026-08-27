@@ -7,7 +7,6 @@ const screens = [
   { href: "/", label: "Daily Life" },
   { href: "/fitness", label: "Fitness" },
   { href: "/notebook", label: "Notebook" },
-  { href: "/export", label: "Export" },
 ];
 
 export function NavSwitcher() {
