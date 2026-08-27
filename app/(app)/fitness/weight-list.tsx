@@ -46,8 +46,8 @@ export function WeightList({ logs }: { logs: WeightLog[] }) {
           >
             <div>
               <p className="text-sm font-medium text-neutral-800">{log.weight_kg} kg</p>
-              <p className="mt-0.5 text-xs text-neutral-500">{formatDate(log.log_date)}</p>
-              {log.notes && <p className="mt-1 text-xs text-neutral-500">{log.notes}</p>}
+              <p className="mt-0.5 text-sm text-neutral-500">{formatDate(log.log_date)}</p>
+              {log.notes && <p className="mt-1 text-sm text-neutral-500">{log.notes}</p>}
             </div>
 
             <button

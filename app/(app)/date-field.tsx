@@ -33,7 +33,7 @@ export function DateField({
             el.focus();
           }
         }}
-        className="flex h-8 w-40 items-center justify-between gap-2 rounded-lg border border-neutral-300 bg-white px-3 text-left text-sm focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500"
+        className="flex h-8 w-40 items-center justify-between gap-2 rounded-lg border border-neutral-300 bg-white pl-3 pr-4 text-left text-sm focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500"
       >
         <span className={value ? "text-neutral-700" : "text-neutral-400"}>
           {value ? formatDate(value) : placeholder}

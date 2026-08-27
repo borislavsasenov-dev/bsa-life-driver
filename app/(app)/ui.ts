@@ -4,8 +4,14 @@
 
 export const labelClass = "text-xs font-medium text-neutral-500";
 
-export const inputClass =
-  "h-8 w-full rounded-lg border border-neutral-300 bg-white px-3 text-sm text-neutral-700 placeholder:text-neutral-400 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500";
+// Width-less base, so controls that should size to their content (e.g. a
+// filter <select> in a toolbar row) can opt out of w-full. Tailwind resolves
+// conflicting width utilities by stylesheet order, not by class-string order,
+// so appending "w-auto" to inputClass does NOT override its w-full.
+export const inputBaseClass =
+  "h-8 rounded-lg border border-neutral-300 bg-white px-3 text-sm text-neutral-700 placeholder:text-neutral-400 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500";
+
+export const inputClass = `w-full ${inputBaseClass}`;
 
 type ButtonVariant = "primary" | "secondary" | "tertiary";
 type ButtonTone = "brand" | "neutral" | "destructive";

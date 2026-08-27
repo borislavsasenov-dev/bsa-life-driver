@@ -87,7 +87,7 @@ export function TaskList({ tasks }: { tasks: Task[] }) {
                     >
                       {task.title}
                     </p>
-                    <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-neutral-500">
+                    <div className="mt-1 flex flex-wrap items-center gap-2 text-sm text-neutral-500">
                       <span className="rounded-full bg-neutral-100 px-2 py-0.5">
                         {task.category}
                       </span>
@@ -104,7 +104,7 @@ export function TaskList({ tasks }: { tasks: Task[] }) {
                       )}
                     </div>
                     {task.notes && (
-                      <p className="mt-1 text-xs text-neutral-500">{task.notes}</p>
+                      <p className="mt-1 text-sm text-neutral-500">{task.notes}</p>
                     )}
                   </div>
                 </div>
